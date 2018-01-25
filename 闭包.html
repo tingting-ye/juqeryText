@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://libs.baidu.com/jquery/1.5.2/jquery.min.js"></script>
+  <title>随心旅程练习页面</title>
+</head>
+
+<body>
+  <div>
+    <h1>闭包</h1>
+    <p>
+      <b>含义:</b>闭包是函数嵌套函数，内部函数可以访问外部函数的参数和变量，并且参数和变量不会被垃圾回收机制所回收。</p>
+    <p>
+      <b>好处：</b>
+      <ul>
+        <li>希望一个变量长期存储在内存之中</li>
+        <li>避免全局污染</li>
+        <li>私有成员的存在(私有方法不仅仅有利于限制对代码的访问：还提供了管理全局命名空间的强大能力，避免非核心的方法弄乱了代码的公共接口部分。)</li>
+      </ul>
+    </p>
+  </div>
+  <script>
+    {/* 简单闭包 */ }
+    // function show(a) { //外面的函数 a是参数(实质也是函数show的局部变量)
+    //   var b = 12//b是局部变量
+    //   function show1() {//里面的函数
+    //     console.log(a) //=》2 //里面的函数可以访问到外面函数的参数和变量
+    //     console.log(b) //=》12
+    //   }
+    //   show1()
+    // }
+    // show(2)
+
+    {/* 垃圾回收机制 */ }
+    // function a(){
+    //   var b=12
+    //   alert(b)
+    //   b++
+    // }
+    // a()
+    // a()  // b为局部变量，每次运行a()都会被垃圾回收机制回收
+
+    // function c(){
+    //   var d = 12
+    //   return function (){
+    //     alert(d)
+    //     d++
+    //   }
+    // }
+    // var e = c()
+    // e()
+    // e()  // d作为变量长期存储在内存之中
+
+    {/* 希望有一个变量长期存贮在内存之中 */ }
+    // function add() {
+    //   var x = 1;
+    //   x++
+    //   return function () {
+    //     console.log("****"+x)
+    //     return x++;
+    //   }
+    // }
+    // var fun = add();
+    // console.log(add()) // f(){return x+1}
+    // console.log(fun()); //1
+    // console.log(fun()); //2
+    // console.log(fun()); //3
+    // fun = null; //回收内存里的x变量
+    // console.log(fun()); // Uncaught TypeError
+
+    {/* 避免全局被污染 */ }
+    // var a = 12
+    // function show(){
+    //   alert(a)
+    //   a++
+    // }
+    // show()
+    // show()
+    // alert(a)  // 全局污染
+
+    // var a = 12
+    // var show = (function(i){
+    //   return function(){
+    //     alert(i)
+    //     i++
+    //   }
+    // })(a)
+    // show()
+    // show()
+    // alert(a)
+
+    {/* 私有成员的存在 */ }
+    // 函数本质其实是一个特殊的对象，函数里面的变量a，定义的函数show1和show2，
+    // 都属于函数的私有成员,在外面访问不到会报错。
+    // function show() {
+    //   var a = 12;
+    //   function show1() {
+    //     alert(a);
+    //     a++;
+    //   }
+    //   function show2() {
+    //     alert(a);
+    //     a++;
+    //   }
+    //   return { show1: show1, show2: show2 }
+    // }
+    // var b = show();//调用函数的返回值
+    // b.show1();//=》 12
+    // b.show2();//=》 13 两次执行都是调用变量他们公共的变量a
+    // alert(a)//报错(局部变量)
+    // alert(show1)//报错
+    // alert(show2)//报错
+
+    // var couter = (function () {
+    //   var a = 1;
+    //   function add(x) {
+    //     a += x;
+    //   };
+
+    //   return {
+    //     add: function () {
+    //       add(1);
+    //     },
+    //     decrement: function () {
+    //       add(-1);
+    //     },
+    //     value: function () {
+    //       return a;
+    //     }
+    //   };
+    // })();
+
+    // couter.add();
+    // console.log(couter.value()); //2
+    // couter.add();
+    // couter.add();
+    // couter.decrement();
+    // console.log(couter.value()); //3
+
+    {/* 封闭空间 */ }
+    // (function(){
+    // })()
+
+    {/* 经典案例 */ }
+    // var name = "The Window";
+    // var object = {
+    //   name: "My Object",
+    //   getNameFunc: function () {
+    //     return function () {
+    //       return this.name;
+    //     };
+    //   }
+    // };
+    // alert(object.getNameFunc()());
+
+    // var name = "The Window";
+    // var object = {
+    //   name: "My Object",
+    //   getNameFunc: function () {
+    //     var that = this;
+    //     return function () {
+    //       return that.name;
+    //     };
+    //   }
+    // };
+    // alert(object.getNameFunc()())
+  </script>
+</body>
+
+</html>
