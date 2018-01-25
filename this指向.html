@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://libs.baidu.com/jquery/1.5.2/jquery.min.js"></script>
+  <title>随心旅程练习页面</title>
+</head>
+
+<body>
+  <div>
+    <h1>this指向问题</h1>
+    <ul>
+      <li>情况1：如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window</li>
+      <li>情况2：如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象</li>
+      <li>情况3：如果一个函数中有this，这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象</li>
+    </ul>
+  </div>
+
+  <script>
+    {/* this指向的是最后调用它的对象 */ }
+
+    // 函数a实际是被Window对象所点出来的，所以this指向window
+    // function a() {
+    //   var user = "追梦子";
+    //   console.log(this.user); //undefined
+    //   console.log(this); //Window
+    // }
+    // a();
+
+    // function a() {
+    //   var user = "追梦子";
+    //   console.log(this.user); //undefined
+    //   console.log(this);　　//Window
+    // }
+    // window.a();
+
+    // 调用这个fn是通过o.fn()执行的，那自然指向就是对象o
+    // var o = {
+    //   user: "追梦子",
+    //   fn: function () {
+    //     console.log(this.user);  //追梦子
+    //   }
+    // }
+    // o.fn();
+
+    // this指向的是最后调用他的对象。
+    // 例子中虽然函数fn是被对象b所引用，但是在将fn赋值给变量j的时候并没有执行所以最终指向的是window
+    // var o = {
+    //   a: 10,
+    //   b: {
+    //     a: 12,
+    //     fn: function () {
+    //       console.log(this.a); //undefined
+    //       console.log(this); //window
+    //     }
+    //   }
+    // }
+    // var j = o.b.fn;
+    // j();
+  </script>
+</body>
+
+</html>
