@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://libs.baidu.com/jquery/1.5.2/jquery.min.js"></script>
+  <title>js 基本类型与引用类型的区别</title>
+</head>
+
+<body>
+  <h1>js 基本类型与引用类型的区别</h1>
+  <h2>基本类型</h2>
+  <h5>undefined,null,string,num,bool</h5>
+  <p>基本类型的变量是存放在栈区的（栈区指内存里的栈内存）</p>
+  <div>
+    var name = 'jozo'; var city = 'guangzhou'; var age = 22;
+    <img src="https://segmentfault.com/img/bVlRQT" />
+  </div>
+  <h2>引用类型</h2>
+  <h5>array,func,object</h5>
+  <ul>
+    <li>
+      <h5>1.引用类型的值是可变的</h5>
+      <div>
+        var person = {};//创建个控对象 --引用类型 person.name = 'jozo'; person.age = 22; person.sayName = function(){console.log(person.name);}
+        person.sayName();// 'jozo' delete person.name; //删除person对象的name属性 person.sayName(); // undefined
+      </div>
+    </li>
+    <li>
+      <h5>2.引用类型的值是同时保存在栈内存和堆内存中的对象</h5>
+      <div>
+        引用类型的存储需要内存的栈区和堆区（堆区是指内存里的堆内存）共同完成，栈区内存保存变量标识符和指向堆内存中该对象的指针，也可以说是该对象在堆内存的地址。 假如有以下几个对象： var person1 = {name:'jozo'}; var
+        person2 = {name:'xiaom'}; var person3 = {name:'xiaoq'};
+      </div>
+      <img src="https://segmentfault.com/img/bVlRRK" />
+    </li>
+    <li>
+      <h5>3.引用类型的比较是引用的比较</h5>
+      <p>引用类型时按引用访问的，换句话说就是比较两个对象的堆内存中的地址是否相同，那很明显，person1和person2在堆内存中地址是不同的：</p>
+      <img src="https://segmentfault.com/img/bVlRSw" />
+    </li>
+  </ul>
+  <h2>普通赋值</h2>
+  <div>
+    var a = 10; var b = a; a ++ ; console.log(a); // 11 console.log(b); // 10
+  </div>
+  <img src="https://segmentfault.com/img/bVlSaN" />
+  <p>也就是说基本类型在赋值操作后，两个变量是相互不受影响的。</p>
+  <h2>4.对象引用</h2>
+  <script>
+  </script>
+</body>
+
+</html>
