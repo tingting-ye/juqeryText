@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://libs.baidu.com/jquery/1.5.2/jquery.min.js"></script>
+  <script src="js/underscore.js"></script>
+  <title>面试题</title>
+</head>
+
+<body>
+  <div>
+    <input type="text" id="search" name="search" />
+  </div>
+  <script>
+    /*
+     * 易错点：splice(index,num,item1, ..., itemX)
+     * index为下标，num为删除几项，后面则是对应下标需要加入的内容
+    */
+    // var a = [1, 2, 3, 4]
+    // a.splice(1, 1, 2, 3, 4)
+    // console.log(a)
+
+    /*
+     * 易错点：变量提升&&this
+     * 变量提升，将var foo 提到函数顶部
+     * this 对象的理解
+    */
+    // var foo = 1
+    // function main(){
+    //   alert(foo)
+    //   var foo = 2
+    //   alert(this.foo)
+    //   this.foo = 3
+    // }
+    // main() // undefind,1
+    // new main() //undefined,undefined new 一个新函数，指向的是新对象
+
+    /* 
+     * 题目：编写JavaScript函数，传入仅包含数字多维数组，返回拍平后的结果（如[1,[2,3]],返回[1,2,3]）
+     * 妙用join()
+    */
+    // function aaa(arr){
+    //   return arr.join(",").split(',').map(v=>parseInt(v))
+    // }
+
+    /*
+     * 题目：当用户在文本输入搜索条件时候，自动查询匹配的关键词并提示给用户
+     * Undersoure=>Throttle,Debounce用来函数的定时控制（回调）
+     */
+    // var query = _(function () {
+    //   // 在这里进行查询操作  
+    //   console.log(this.value)
+    // }).debounce(500);
+    // $('#search').bind('keypress', query); 
+
+    // var query = _(function() {  
+    //     // 在这里进行查询操作  
+    //     console.log("我滚动了！")
+    // }).throttle(500);  
+
+    // $(window).bind('scroll', query); 
+
+    /* 
+     * cookie ：有服务器生成，用于用户身份识别；在设置有效期内有效，否则默认浏览器关闭；存储空间小；当同源且path规则符合要求时，可共享
+     * sessionstorage ：客户端用于缓存数据，浏览器关闭前有效，存储空间大，不可共享
+     * localstorage ：客户端用于缓存数据；长期有效，除非手动删除；存储空间大，同源文档可共享
+     */
+    // sessionStorage.lastname="may";
+    // localStorage.lastname = "Smith";
+  </script>
+</body>
+
+</html>
