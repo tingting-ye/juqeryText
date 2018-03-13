@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://libs.baidu.com/jquery/1.5.2/jquery.min.js"></script>
+  <title>变量</title>
+</head>
+
+<body>
+  <!-- 
+      重点：
+      1.函数中的参数都是按值传递的。
+      2.在向参数传递基本类型的值时，被传递的值被复制给一个局部变量（即命名参数，
+      或者用ECMAScript的概念来说，就是arguments对象中的一个元素）。在向参
+      数传递引用类型时，会把这个值在内存中的地址（指针）复制给一个局部变量，
+      因此这个局部变量的变化会反映在函数的外部。（参考例4，例5） 
+    -->
+  <script>
+    /* 例1
+     * 基本变量
+     * 存于栈内存中，变量复制后互不影响 
+    */
+    // var a = 1
+    // var b = a
+    // a = 2
+    // console.log(a)
+    // console.log(b)
+
+    /* 例2
+    * 引用变量
+    * 同时保存在栈内存和堆内存中 
+    * 引用类型的存储需要内存的栈区和堆区（堆区是指内存里的堆内存）共同完成，
+    * 栈区内存保存变量标识符和指向堆内存中该对象的指针，也可以说是该对象在堆内存的地址。
+    */
+    // var a = { jzd: "杭州" }
+    // console.log("a1*****" + a.jzd)
+    // var b = a
+    // a.jzd = "上海"
+    // console.log("a2*****" + a.jzd)
+    // console.log("b1*****" + b.jzd)
+    // b = new Object()
+    // console.log("a3*****" + a.jzd)
+    // console.log("b2*****" + b.jzd)
+
+    /* 例3
+     * 传递参数1
+     * 基本类型复制后俩个变量完全独立，之后任何一方改变都不会影响另一方
+     * 同例1
+     */
+    // var a = 10
+    // function deal(x) {
+    //   x = 20
+    // }
+    // deal(a)
+    // console.log(a)
+
+    /* 例4
+     * 传递参数2
+     * 引用类型复制的是引用（即指针），之后的任何一方改变都会映射到另一方
+     * 同例2
+     */
+    //  var a = new Object()
+    //  function deal(x){
+    //    x.name = "ytt"
+    //  }
+    //  deal(a)
+    //  console.log(a.name)
+
+    /* 例5
+    * 传递参数3
+    * 对象也是按值传递的
+    */
+    // var a = new Object()
+    // function deal(x) {
+    //   x.age = 20
+    //   x = new Object()
+    //   x.age = 1
+    // }
+    // deal(a)
+    // console.log(a.age)
+
+    /* 例6
+    * 检验类型
+    * typeof方法
+    */
+    // var deal = function () { }
+    // console.log(typeof "a")
+    // console.log(typeof true)
+    // console.log(typeof 1)
+    // console.log(typeof undefined)
+    // console.log(typeof null)
+    // console.log(typeof deal)
+    // console.log(typeof object)
+
+    /* 例7
+    * 检验类型
+    * instanceof方法 判断是属于什么类型的对象
+    */
+    // var a = { q: 1, b: 1 }
+    // var b = [1, 2, 3, 4]
+    // console.log(a instanceof Object)  // true
+    // console.log(b instanceof Object)  // true
+    // console.log(a instanceof Array) // false
+    // console.log(b instanceof Array) // true
+    // console.log(a instanceof RegExp) // false
+    // console.log(b instanceof RegExp) // false
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://libs.baidu.com/jquery/1.5.2/jquery.min.js"></script>
+  <title>随心旅程练习页面</title>
+</head>
+
+<body>
+  <div class="adressInfo">
+    <table border="1" id="11111">
+      <thead>
+        <tr>
+          <th colspan="6">地址信息</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>地址属性</td>
+          <td colspan="5">
+            <select class="dzsx">
+              <option value="1">标准地址</option>
+              <option value="2">非标准地址</option>
+              <option value="3">虚拟地址</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>管辖单位</td>
+          <td colspan="2">
+            <select class="gxdw_fj">
+              <option value="0">请选择分局</option>
+              <option value="1">浙江省</option>
+              <option value="2">福建省</option>
+              <option value="3">安微省</option>
+            </select>
+          </td>
+          <td>
+            <select class="gxdw_pcs" disabled>
+              <option value="0">请选择派出所</option>
+              <option value="1">杭州市</option>
+              <option value="2">温州市</option>
+              <option value="3">宁波市</option>
+            </select>
+          </td>
+          <td colspan="2">
+            <select class="gxdw_zrq" disabled>
+              <option value="0">请选择责任区</option>
+              <option value="1">西湖区</option>
+              <option value="2">上城区</option>
+              <option value="3">下城区</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>行政单位</td>
+          <td>山东省</td>
+          <td>青岛市</td>
+          <td>
+            <select class="xzdw_qx">
+              <option value="0">请选择区县</option>
+              <option value="1">西湖区</option>
+              <option value="2">上城区</option>
+              <option value="3">下城区</option>
+            </select>
+          </td>
+          <td>
+            <select class="xzdw_jd" disabled>
+              <option value="0">请选择街道、镇</option>
+              <option value="1">西湖区</option>
+              <option value="2">上城区</option>
+              <option value="3">下城区</option>
+            </select>
+          </td>
+          <td>
+            <select class="xzdw_sq" disabled>
+              <option value="0">请选择社区、居委会</option>
+              <option value="1">西湖区</option>
+              <option value="2">上城区</option>
+              <option value="3">下城区</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>道路地址</td>
+          <td colspan="3">
+            <select class="xzdw_custom" disabled>
+              <option value="0">请选择地名办命名的道、路、街、巷</option>
+              <option value="1">西湖区</option>
+              <option value="2">上城区</option>
+              <option value="3">下城区</option>
+            </select>
+          </td>
+          <td>
+            <input type="text" class="xzdw_zh" placeholder="请输入道路号">号</td>
+          <td>
+            <input type="text" class="xzdw_fh" placeholder="请输入道路号">号</td>
+        </tr>
+        <tr>
+          <td>区域地址</td>
+          <td>
+            <select class="qydz_lx">
+              <option value="1">小区</option>
+              <option value="2">自然村</option>
+            </select>
+          </td>
+          <td>
+            <select class="qydz_xq" disabled>
+              <option value="0">请选择小区、自然村</option>
+              <option value="1">西湖区</option>
+              <option value="2">上城区</option>
+              <option value="3">下城区</option>
+            </select>
+          </td>
+          <td colspan="2">
+            <input type="text" class="qydz_cz" placeholder="请输入村组信息">组</td>
+          <!-- <td colspan="2">
+            <select class="qydz_fsq" disabled>
+              <option value="0">请选择附属区、苑</option>
+              <option value="1">西湖区</option>
+              <option value="2">上城区</option>
+              <option value="3">下城区</option>
+            </select>
+          </td> -->
+          <td>
+            <input type="text" class="qydz_lz" placeholder="请输入楼幢号">
+            <select class="qydz_lzlx" disabled>
+              <option value="1">幢</option>
+              <option value="2">号</option>
+              <option value="3">户</option>
+              <option value="4">栋</option>
+              <option value="5">号楼</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>地址全称</td>
+          <td colspan="5" class="dzqc_all"></td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      var obj = {}
+      $("table").map(function () {
+        var tableId = $(this).attr("id")
+        obj[tableId] = {}
+      })
+      // 获取“地址属性”
+      $("select[class='dzsx']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        obj[tableId]["dzsx"] = selectValue
+        if (selectValue === "1" || selectValue === "3") {
+          $(`table[id=` + tableId + `]`).find(".xzdw_zh").attr("placeholder", "请输入数字主号")
+          $(`table[id=` + tableId + `]`).find(".xzdw_fh").attr("placeholder", "请输入数字辅号")
+        } else {
+          $(`table[id=` + tableId + `]`).find(".xzdw_zh").attr("placeholder", "请输入主号")
+          $(`table[id=` + tableId + `]`).find(".xzdw_fh").attr("placeholder", "请输入辅号")
+        }
+        console.log(obj)
+      })
+      // 获取“分局”value
+      $("select[class='gxdw_fj']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        delete obj[tableId]["gxdw_fj"]
+        delete obj[tableId]["gxdw_pcs"]
+        delete obj[tableId]["gxdw_zrq"]
+        $(`table[id=` + tableId + `]`).find(".gxdw_pcs").val("0")
+        $(`table[id=` + tableId + `]`).find(".gxdw_pcs").attr("disabled", true)
+        $(`table[id=` + tableId + `]`).find(".gxdw_zrq").val("0")
+        $(`table[id=` + tableId + `]`).find(".gxdw_zrq").attr("disabled", true)
+        if (selectValue === "0") {
+          console.log(obj)
+          return
+        }
+        $(`table[id=` + tableId + `]`).find(".gxdw_pcs").removeAttr("disabled")
+        obj[tableId]["gxdw_fj"] = selectValue
+        console.log(obj)
+      })
+      // 获取“派出所”value
+      $("select[class='gxdw_pcs']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        delete obj[tableId]["gxdw_pcs"]
+        delete obj[tableId]["gxdw_zrq"]
+        $(`table[id=` + tableId + `]`).find(".gxdw_zrq").val("0")
+        $(`table[id=` + tableId + `]`).find(".gxdw_zrq").attr("disabled", true)
+        if (selectValue === "0") {
+          console.log(obj)
+          return
+        }
+        $(`table[id=` + tableId + `]`).find(".gxdw_zrq").removeAttr("disabled")
+        obj[tableId]["gxdw_pcs"] = selectValue
+        console.log(obj)
+      })
+      // 获取“责任区”value
+      $("select[class='gxdw_zrq']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        if (selectValue === "0") {
+          delete obj[tableId]["gxdw_zrq"]
+          delete obj[tableId]["gxdw_zrq_name"]
+          console.log(obj)
+          return
+        }
+        obj[tableId]["gxdw_zrq"] = selectValue
+        console.log(obj)
+      })
+      // 获取“区县”value
+      $("select[class='xzdw_qx']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        var selectName = $(this).find("option:selected").text()
+        // ”区县“值发生改变，”街道“、”社区“、”道路街巷“、”小区、自然村“、”附属区、苑“全部恢复初始值
+        delete obj[tableId]["xzdw_qx"] // 删除”区县“值
+        delete obj[tableId]["xzdw_qx_name"] // 删除”区县“值
+        delete obj[tableId]["xzdw_jd"] // 删除”街道“值
+        delete obj[tableId]["xzdw_jd_name"] // 删除”街道“值
+        delete obj[tableId]["xzdw_sq"] // 删除”社区“值
+        delete obj[tableId]["xzdw_sq_name"] // 删除”社区“值
+        delete obj[tableId]["xzdw_custom"] // 删除”道路街巷“值
+        delete obj[tableId]["xzdw_custom_name"] // 删除”道路街巷“值
+        delete obj[tableId]["qydz_xq"] // 删除”小区、自然村“值
+        delete obj[tableId]["qydz_xq_name"] // 删除”小区、自然村“值
+        delete obj[tableId]["qydz_fsq"] // 删除”附属区、苑“值
+        delete obj[tableId]["qydz_fsq_name"] // 删除”附属区、苑“值
+        $(`table[id=` + tableId + `]`).find(".xzdw_jd").val("0")
+        $(`table[id=` + tableId + `]`).find(".xzdw_jd").attr("disabled", true) // 删除”街道“值
+        $(`table[id=` + tableId + `]`).find(".xzdw_sq").val("0")
+        $(`table[id=` + tableId + `]`).find(".xzdw_sq").attr("disabled", true)
+        $(`table[id=` + tableId + `]`).find(".xzdw_custom").val("0")
+        $(`table[id=` + tableId + `]`).find(".xzdw_custom").attr("disabled", true)
+        $(`table[id=` + tableId + `]`).find(".qydz_xq").val("0")
+        $(`table[id=` + tableId + `]`).find(".qydz_xq").attr("disabled", true)
+        $(`table[id=` + tableId + `]`).find(".qydz_fsq").val("0")
+        $(`table[id=` + tableId + `]`).find(".qydz_fsq").attr("disabled", true)
+        if (selectValue === "0") {
+          console.log(obj)
+          dzqc(tableId)
+          return
+        }
+        $(`table[id=` + tableId + `]`).find(".xzdw_jd").removeAttr("disabled")
+        obj[tableId]["xzdw_qx"] = selectValue
+        obj[tableId]["xzdw_qx_name"] = selectName
+        dzqc(tableId)
+        console.log(obj)
+      })
+      // 获取“街道、镇”value
+      $("select[class='xzdw_jd']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        var selectName = $(this).find("option:selected").text()
+        // ”街道、镇“值发生改变，”社区“、”道路街巷“、”小区、自然村“、”附属区、苑“全部恢复初始值
+        delete obj[tableId]["xzdw_jd"] // 删除”街道“值
+        delete obj[tableId]["xzdw_jd_name"] // 删除”街道“值
+        delete obj[tableId]["xzdw_sq"] // 删除”社区“值
+        delete obj[tableId]["xzdw_sq_name"] // 删除”社区“值
+        delete obj[tableId]["xzdw_custom"] // 删除”道路街巷“值
+        delete obj[tableId]["xzdw_custom_name"] // 删除”道路街巷“值
+        delete obj[tableId]["qydz_xq"] // 删除”小区、自然村“值
+        delete obj[tableId]["qydz_xq_name"] // 删除”小区、自然村“值
+        delete obj[tableId]["qydz_fsq"] // 删除”附属区、苑“值
+        delete obj[tableId]["qydz_fsq_name"] // 删除”附属区、苑“值
+        $(`table[id=` + tableId + `]`).find(".xzdw_sq").val("0")
+        $(`table[id=` + tableId + `]`).find(".xzdw_sq").attr("disabled", true)
+        $(`table[id=` + tableId + `]`).find(".xzdw_custom").val("0")
+        $(`table[id=` + tableId + `]`).find(".xzdw_custom").attr("disabled", true)
+        $(`table[id=` + tableId + `]`).find(".qydz_xq").val("0")
+        $(`table[id=` + tableId + `]`).find(".qydz_xq").attr("disabled", true)
+        $(`table[id=` + tableId + `]`).find(".qydz_fsq").val("0")
+        $(`table[id=` + tableId + `]`).find(".qydz_fsq").attr("disabled", true)
+        if (selectValue === "0") {
+          console.log(obj)
+          dzqc(tableId)
+          return
+        }
+        $(`table[id=` + tableId + `]`).find(".xzdw_sq").removeAttr("disabled")
+        obj[tableId]["xzdw_jd"] = selectValue
+        obj[tableId]["xzdw_jd_name"] = selectName
+        dzqc(tableId)
+        console.log(obj)
+      })
+      // 获取“社区、居委会”value
+      $("select[class='xzdw_sq']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        var selectName = $(this).find("option:selected").text()
+        // ”社区“值发生改变，”道路街巷“、”小区、自然村“、”附属区、苑“全部恢复初始值
+        delete obj[tableId]["xzdw_sq"] // 删除”社区“值
+        delete obj[tableId]["xzdw_sq_name"] // 删除”社区“值
+        delete obj[tableId]["xzdw_custom"] // 删除”道路街巷“值
+        delete obj[tableId]["xzdw_custom_name"] // 删除”道路街巷“值
+        delete obj[tableId]["qydz_xq"] // 删除”小区、自然村“值
+        delete obj[tableId]["qydz_xq_name"] // 删除”小区、自然村“值
+        delete obj[tableId]["qydz_fsq"] // 删除”附属区、苑“值
+        delete obj[tableId]["qydz_fsq_name"] // 删除”附属区、苑“值
+        $(`table[id=` + tableId + `]`).find(".xzdw_custom").val("0")
+        $(`table[id=` + tableId + `]`).find(".xzdw_custom").attr("disabled", true)
+        $(`table[id=` + tableId + `]`).find(".qydz_xq").val("0")
+        $(`table[id=` + tableId + `]`).find(".qydz_xq").attr("disabled", true)
+        $(`table[id=` + tableId + `]`).find(".qydz_fsq").val("0")
+        $(`table[id=` + tableId + `]`).find(".qydz_fsq").attr("disabled", true)
+        if (selectValue === "0") {
+          console.log(obj)
+          dzqc(tableId)
+          return
+        }
+        $(`table[id=` + tableId + `]`).find(".xzdw_custom").removeAttr("disabled")
+        $(`table[id=` + tableId + `]`).find(".qydz_xq").removeAttr("disabled")
+        obj[tableId]["xzdw_sq"] = selectValue
+        obj[tableId]["xzdw_sq_name"] = selectName
+        dzqc(tableId)
+        console.log(obj)
+      })
+      // 获取“地名办命名的道、路、街、巷”value
+      $("select[class='xzdw_custom']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        var selectName = $(this).find("option:selected").text()
+        delete obj[tableId]["xzdw_custom"] // 删除”道路街巷“值
+        delete obj[tableId]["xzdw_custom_name"] // 删除”道路街巷“值
+        if (selectValue === "0") {
+          console.log(obj)
+          dzqc(tableId)
+          return
+        }
+        obj[tableId]["xzdw_custom"] = selectValue
+        obj[tableId]["xzdw_custom_name"] = selectName
+        dzqc(tableId)
+        console.log(obj)
+      })
+      // 获取“区域-小区、自然村”value
+      $("select[class='qydz_xq']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        var selectName = $(this).find("option:selected").text()
+        // ”小区、自然村“值发生改变，”附属区、苑“全部恢复初始值
+        delete obj[tableId]["qydz_xq"] // 删除”小区、自然村“值
+        delete obj[tableId]["qydz_xq_name"] // 删除”小区、自然村“值
+        delete obj[tableId]["qydz_fsq"] // 删除”附属区、苑“值
+        delete obj[tableId]["qydz_fsq_name"] // 删除”附属区、苑“值
+        $(`table[id=` + tableId + `]`).find(".qydz_fsq").val("0")
+        $(`table[id=` + tableId + `]`).find(".qydz_fsq").attr("disabled", true)
+        if (selectValue === "0") {
+          console.log(obj)
+          dzqc(tableId)
+          return
+        }
+        $(`table[id=` + tableId + `]`).find(".qydz_fsq").removeAttr("disabled")
+        obj[tableId]["qydz_xq"] = selectValue
+        obj[tableId]["qydz_xq_name"] = selectName
+        dzqc(tableId)
+        console.log(obj)
+      })
+      // 获取“附属区、苑”value
+      $("select[class='qydz_fsq']").unbind("change").change(function () {
+        var tableId = $(this).parent().parent().parent().parent().attr("id")
+        var selectValue = $(this).val()
+        var selectName = $(this).find("option:selected").text()
+        delete obj[tableId]["qydz_fsq"] // 删除”附属区、苑“值
+        delete obj[tableId]["qydz_fsq_name"] // 删除”附属区、苑“值
+        if (selectValue === "0") {
+          console.log(obj)
+          dzqc(tableId)
+          return
+        }
+        obj[tableId]["qydz_fsq"] = selectValue
+        obj[tableId]["qydz_fsq_name"] = selectName
+        dzqc(tableId)
+        console.log(obj)
+      })
+
+      function dzqc(tableId) {
+        var quxian = obj[tableId].xzdw_qx_name || ""
+        var jiedao = obj[tableId].xzdw_jd_name || ""
+        var shequ = obj[tableId].xzdw_sq_name || ""
+        // var qy_dz = obj[tableId].qydz_xq || ""
+        // var detail = ""
+        // if(qy_dz){ // 区域地址有数据，以区域地址为主，否则以道路地址为主
+        //   qy_dz =  obj[tableId].qydz_fsq + obj[tableId].qydz_lzlx
+        // }else{
+        //   var qy_dl = obj[tableId].qydz_xq_name || ""
+        //   qy_dz = ""
+        // }
+        var name = "山东省青岛市" + quxian + jiedao + shequ
+        // name += obj[tableId].qydz_xq ? obj[tableId].xzdw_custom_name + obj[tableId].xzdw_zh + obj[tableId].xzdw_fh : obj[tableId].xzdw_zh + obj[tableId].xzdw_fh + obj[tableId].qydz_xq_name + obj[tableId].qydz_fsq + obj[tableId].qydz_lzlx
+        $(`table[id=` + tableId + `]`).find(".dzqc_all").html(name)
+      }
+    </script>
+  </div>
+</body>
+
+</html>
