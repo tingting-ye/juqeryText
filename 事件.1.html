@@ -1,0 +1,32 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>功能：表单回车直接提交，涉及元素input</title>
+  <script src="http://libs.baidu.com/jquery/1.5.2/jquery.min.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+    input_keypress();
+
+    function input_keypress() {
+      //方法一：
+      $("").keydown(function (e) { //KeyDown()功能:检查用户是否按了键盘上指定的键。
+        if (e.keyCode == 13) { //e.keyCode按的建的代码，13表示回车
+          alert('回车成功！')
+        }
+      });
+      //方法二：
+      $("").bind('keypress', function (event) {
+        if (event.keyCode == "13") // event.keyCode按的建的代码，13表示回车
+        {
+          alert('回车成功！') //""引号内放链接地址
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>

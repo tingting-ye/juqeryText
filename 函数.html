@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +8,113 @@
   <script src="http://libs.baidu.com/jquery/1.5.2/jquery.min.js"></script>
   <title>随心旅程练习页面</title>
 </head>
+
 <body>
   <div>
-    <h1>函数</h1>
-    <ul>
-      <p>函数定义方式：</p>
-      <li>函数声明语句：使用function关键字
-        <div style="background:#e2e2e2; border:1px solid #000;">
-          function funcname(){}
-        </div>
-      </li>
-      <li>函数定义表达式(匿名函数):</li>
-      <li></li>
-    </ul>
   </div>
   <Script>
-    function foo(){
-      console.log(1);
-  }
-  delete foo;//false
-  console.log(foo());//1
+    // var str = "123"
+    // 获取单个数字
+    // console.log(str.charAt(0))
+    // console.log(str.charAt(1))
+    // console.log(str.charAt(2))
+
+    // 字符串基于数组,可像数组一样存取,以chrtAt方法为主
+    // console.log(str[0])
+    // console.log(str[1])
+    // console.log(str[2])
+    // console.log(str.length)
+
+    // 实现n的阶乘  n! = 1*2*3*4*....*n
+    // 1! = 1  1
+    // 2! = 1*2  2
+    // 3! = 1*2*3  4
+    // 4! = 1*2*3*4  24
+    // var num = window.prompt('input')
+    // var total = 1
+    // if (num > 1) {
+    //   for (var i = 1; i <= num; i++) {
+    //     total *= i
+    //   }
+    // }
+    // console.log(total)
+
+    // function jc(num) {
+    //   debugger
+    //   if (num == 1) {
+    //     return 1
+    //   }
+    //   return num * jc(num-1)
+    // }
+    // console.log(jc(num))
+
+    // 斐波那契数列 fb(n)=fb(n-1)+fb(n-2)
+    // var num = window.prompt('input')
+    // 1、1、2、3、5、8、13、21、34
+    // 1   
+    // 1 1
+    // 1 1 2
+    // 1 1 2 3
+    // var total = 1
+    // var a = 1
+    // var b = 1
+    // if (num >2) {
+    //   for (var i = 1; i < num-1; i++) {
+    //     total = a+b
+    //     a = b
+    //     b = total
+    //   }
+    // }
+    // console.log(total)
+
+    // function fb(num) {
+    //   if(num==1 || num==2){
+    //     return 1
+    //   }
+    //   return fb(num - 1) + fb(num - 2)
+    // }
+    // console.log(fb(num))
+
+    // function fn(a){
+    //   console.log(a)
+    //   var a = 123
+    //   console.log(a)
+    //   function a (){}
+    //   console.log(a)
+    //   var b = function (){}
+    //   console.log(b)
+    //   function d (){}
+    // }
+    // fn(1)
+
+    // function test() {
+    //   console.log(foo);  // fun foo
+    //   console.log(bar);  // undefined
+    //   var foo = 'Hello';
+    //   console.log(foo);  // hello
+    //   var bar = function () {
+    //     return 'world';
+    //   }
+    //   function foo() {
+    //     return 'hello';
+    //   }
+    // }
+    // test();
+
+    function a() {
+      var arr = []
+      for (var i = 0; i < 10; i++) {
+        arr[i] = function(){
+          console.log(i)
+        }
+      }
+      return arr
+    }
+    var demoArr = a()
+    for (var j=0;j<10;j++){
+      demoArr[j]()
+    } 
   </Script>
 </body>
+
 </html>

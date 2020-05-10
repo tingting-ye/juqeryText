@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://libs.baidu.com/jquery/1.5.2/jquery.min.js"></script>
+  <title>随心旅程练习页面</title>
+</head>
+
+<body>
+  <div class="p">
+    i am www.mahaixiang.cn
+    <div class="c">i like www.mahaixiang.cn</div>
+  </div>
+
+  <script>
+    // //实现深拷贝
+    // function deepCopy(target) {
+    //   debugger
+    //   if (typeof target !== 'object') return;
+    //   //判断目标类型，来创建返回值
+    //   var newObj = target instanceof Array ? [] : {};
+
+    //   for (var item in target) {
+    //     //只复制元素自身的属性，不复制原型链上的
+    //     if (target.hasOwnProperty(item)) {
+    //       newObj[item] = typeof target[item] == 'object' ? deepCopy(target[item]) : target[item] //判断属性值类型
+
+    //     }
+    //   }
+
+    //   return newObj
+    // }
+
+    // //测试
+    // var test = [1, 'a', { name: 'lei', age: 18 }];
+
+    // var copy2 = deepCopy(test);
+    // copy2[2].name = 'zhang'
+
+    // console.log(test); ////[1,'a',{name:'lei',age:18}] 未受到影响
+    var obj1 = ["ytt", { dizhi: "hangz", huju: "zjs", ll: { a: "1", b: "2" } }]
+    var obj = $.extend(false, [], obj1)
+    obj[1].ll.a = "qwer".addclass
+    $("p").addClass
+  </script>
+  <!-- <script>
+    function Animal() {
+      this.species = "动物";
+    }
+    var animal1 = new Animal()
+    
+    
+    function Cat(name, color) {
+      this.name = name;
+      this.color = color;
+    }
+
+    var cat1 = new Cat("大毛", "黄色");
+    // console.log(JSON.stringify({ name: "ytt", sex: "女", age: 19 }))
+    // console.log(JSON.parse('{ "name": "ytt", "sex": "女", "age": 19 }'))
+  </script> -->
+</body>
+
+</html>

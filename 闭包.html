@@ -71,6 +71,15 @@
     // console.log(fun()); //3
     // fun = null; //回收内存里的x变量
     // console.log(fun()); // Uncaught TypeError
+    
+    // AO = {
+    //   x : 1,
+    //   a : function () {
+    //     console.log("****"+x)
+    //     return x++;
+    //   }
+    // }
+
 
     {/* 避免全局被污染 */ }
     // var a = 12
@@ -89,9 +98,23 @@
     //     i++
     //   }
     // })(a)
-    // show()
-    // show()
-    // alert(a)
+    // show() //12
+    // show() // 13
+    // alert(a) // 14
+
+    // GO = {
+    //   a :12,
+    //   show :(function(i){
+    //     return function(){
+    //       alert(i)
+    //       i++
+    //     }
+    //   })(a)
+    // }
+
+    // AO = {
+    //   i:12
+    // }
 
     {/* 私有成员的存在 */ }
     // 函数本质其实是一个特殊的对象，函数里面的变量a，定义的函数show1和show2，
@@ -114,6 +137,23 @@
     // alert(a)//报错(局部变量)
     // alert(show1)//报错
     // alert(show2)//报错
+    
+    // GO = {
+    //   b : undefined,
+    // }
+
+    // AO(b)={
+    //   a:12,
+    //   show1:function show1() {
+    //     alert(a);
+    //     a++;
+    //   },
+    //   show2:function show2() {
+    //     alert(a);
+    //     a++;
+    //   }
+    // }
+
 
     // var couter = (function () {
     //   var a = 1;
@@ -141,6 +181,14 @@
     // couter.decrement();
     // console.log(couter.value()); //3
 
+
+    // AO = {
+    //   a :1,
+    //   add : function (x){
+    //     a += x
+    //   },
+    // }
+
     {/* 封闭空间 */ }
     // (function(){
     // })()
@@ -155,7 +203,9 @@
     //     };
     //   }
     // };
-    // alert(object.getNameFunc()());
+    // // var aaa = object.getNameFunc()
+    // // alert(aaa());
+    // alert(object.getNameFunc()())
 
     // var name = "The Window";
     // var object = {
@@ -168,6 +218,48 @@
     //   }
     // };
     // alert(object.getNameFunc()())
+
+    // var func = (function (a) {  //a =1
+    //   this.a = a; 
+    //   return function (a) {
+    //     console.log(this.a)
+    //     a += this.a;
+    //     return a;
+    //   }
+    // })(function (a, b) {
+    //   return a;
+    // }(1, 2));
+    // console.log(func(4))
+
+    // function shuffle(a) {
+    //   var b = [];
+    //   while (a.length > 0) {
+    //     var index = parseInt(Math.random() * (a.length - 1));
+    //     b.push(a[index]);
+    //     a.splice(index, 1);
+    //   }
+    //   return b;
+    // }
+
+
+    // console.log(shuffle([1,2,3,4]))
+
+    // function repeat(str,len){
+    //   var rlt = {}
+    //   for(var i=0;var s=str.slice(i,i,i+len);
+    //   var reg=new RegExp(s.replace(/\\/g,"\\\\"),"g")
+    //   reg.lastIndex=i+1
+    //   if(reg.text(str)&&!rlt[s]){
+    //     rlt[s]=1
+    //   }
+    //   }
+    //   return Object.keys(rlt)
+    // }
+    // localStorage.setItem("dizhi","杭州")
+
+      // function a(){
+      //   a()
+      // }
   </script>
 </body>
 
